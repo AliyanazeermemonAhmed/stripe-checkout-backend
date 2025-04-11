@@ -1,5 +1,4 @@
 const Stripe = require('stripe');
-
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 module.exports = async (req, res) => {
@@ -11,11 +10,11 @@ module.exports = async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
-          price: 'price_1R9D4JGGNueOoYjKL6P1akN8',
+          price: 'price_1R9D4JGGNueOoYjKL6P1akN8',  // Ensure this price ID is correct
           quantity: 1,
         },
       ],
-      mode: 'subscription',
+      mode: 'payment',  // Changed to 'payment' for one-time charge
       success_url: 'https://www.capturify.io/thank-you',
       cancel_url: 'https://www.capturify.io',
     });
